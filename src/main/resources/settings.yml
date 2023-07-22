@@ -1,0 +1,2 @@
+#The level of Y as you fall into the void that you'll get killed after passing it
+void-height: 15 #Numbers are already converted to negative

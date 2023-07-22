@@ -1,0 +1,6 @@
+host: localhost
+port: 3306
+database: test
+table: runners_data
+username: saifk
+password: asd123321

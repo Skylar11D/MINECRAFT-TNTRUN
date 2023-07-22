@@ -1,0 +1,7 @@
+name: TNTRUN
+main: org.skylar11d.minecraftp.tntrun.Main
+version: 1.0
+author: Skylar11D
+
+commands:
+  arena:
