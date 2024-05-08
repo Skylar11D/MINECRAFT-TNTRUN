@@ -7,25 +7,28 @@ import org.skylar11d.minecraftp.tntrun.utilities.data.impl.IMySQL;
 import org.skylar11d.minecraftp.tntrun.utilities.plugin.PluginManager;
 import org.skylar11d.minecraftp.tntrun.utilities.plugin.Provider;
 
-import java.sql.Connection;
-
 public class MainProvider implements Provider {
 
     private IMySQL iMySQL;
+    private final FileConfiguration databaseConfiguration;
+
+    public MainProvider(Main clazz){
+        this.databaseConfiguration = clazz.getConfigManager().getConfig(ConfigType.DATABASE);
+    }
 
     @Override
     public void onEnable() {
 
+        this.iMySQL = new MySQL(
+                databaseConfiguration.getString("database"),
+                databaseConfiguration.getString("host"),
+                databaseConfiguration.getInt("port"),
+                databaseConfiguration.getString("username"),
+                databaseConfiguration.getString("password")
+        );
+
         PluginManager.getPluginManager().initializeCommands();
         PluginManager.getPluginManager().initializeListeners();
-
-        this.iMySQL = new MySQL(
-                Main.getInstance().getConfigManager().getConfig(ConfigType.DATABASE).getString("database"),
-                Main.getInstance().getConfigManager().getConfig(ConfigType.DATABASE).getString("host"),
-                Main.getInstance().getConfigManager().getConfig(ConfigType.DATABASE).getInt("port"),
-                Main.getInstance().getConfigManager().getConfig(ConfigType.DATABASE).getString("username"),
-                Main.getInstance().getConfigManager().getConfig(ConfigType.DATABASE).getString("password")
-        );
 
     }
 

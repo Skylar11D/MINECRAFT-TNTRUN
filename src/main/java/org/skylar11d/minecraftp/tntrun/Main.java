@@ -33,7 +33,7 @@ public class Main extends JavaPlugin {
         long timer = System.currentTimeMillis();
         System.out.println("initializing plugin's declared variables..");
         instance = this;
-        provider = new MainProvider();
+        provider = new MainProvider(this);
         gameManager = new GameManager(this, GameState.WAITING);
         runnerManager = new RunnerManager();
         configManager = new ConfigManager();
