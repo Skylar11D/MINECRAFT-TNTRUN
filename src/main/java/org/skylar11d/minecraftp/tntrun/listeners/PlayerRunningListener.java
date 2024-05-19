@@ -15,11 +15,11 @@ public class PlayerRunningListener implements Listener {
     ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @EventHandler
-    public void onRunning(@NotNull PlayerRunEvent e){
+    public void onRunning(PlayerRunEvent e){
         RunnerManager runnerManager = Main.getInstance().getRunnerManager();
-        Runner runner = e.getRunner();
+        @NotNull Runner runner = e.getRunner();
 
-        pool.execute(() -> runnerManager.getRunners().get(runner).runTaskLater(Main.getPlugin(Main.class), 14));
+        pool.execute(() -> runnerManager.getRunners().get(runner).runTaskLater(Main.getPlugin(Main.class), 6));
     }
 
 }
