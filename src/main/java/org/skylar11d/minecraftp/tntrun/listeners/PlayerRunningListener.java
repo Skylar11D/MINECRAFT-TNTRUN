@@ -19,7 +19,7 @@ public class PlayerRunningListener implements Listener {
         RunnerManager runnerManager = Main.getInstance().getRunnerManager();
         Runner runner = e.getRunner();
 
-        pool.execute(() -> runnerManager.getRunners().get(runner).runTaskLater(Main.getPlugin(Main.class), 14));
+        pool.execute(() -> runnerManager.getRunners().get(runner).runTaskLater(Main.getPlugin(Main.class), 6));
     }
 
 }
