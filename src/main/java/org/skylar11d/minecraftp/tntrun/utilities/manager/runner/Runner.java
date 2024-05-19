@@ -173,8 +173,9 @@ public abstract class Runner {
     public void setVictories(int quantity){
         try {
             Connection conn = Main.getInstance().getProvider().getMySQL().getConnection();
-            PreparedStatement pStatement = conn.prepareStatement("UPDATE runners_data SET 'VICTORIES'=?");
+            PreparedStatement pStatement = conn.prepareStatement("UPDATE runners_data SET 'VICTORIES'=? WHERE UUID=?");
             pStatement.setInt(1, quantity);
+            pStatement.setString(2, getPlayer().getUniqueId().toString());
             pStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -184,8 +185,9 @@ public abstract class Runner {
     public void setLoses(int quantity){
         try {
             Connection conn = Main.getInstance().getProvider().getMySQL().getConnection();
-            PreparedStatement pStatement = conn.prepareStatement("UPDATE runners_data SET 'LOSES'=?");
+            PreparedStatement pStatement = conn.prepareStatement("UPDATE runners_data SET 'LOSES'=? WHERE UUID=?");
             pStatement.setInt(1, quantity);
+            pStatement.setString(2, getPlayer().getUniqueId().toString());
             pStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
