@@ -30,12 +30,7 @@ public class RunnerManager {
     public Map<Runner, BukkitRunnable> getRunners(){return runners;}
 
     public void registerRunner(Player p){
-        runners.put(new Runner() {
-            @Override
-            public Player getPlayer(){
-                return p;
-            }
-        }, new blockEliminationTask() {
+        runners.put(() -> p, new blockEliminationTask() {
             @Override
             public Player getPlayer() {
                 return p;

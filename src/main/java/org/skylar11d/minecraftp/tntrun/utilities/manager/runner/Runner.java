@@ -23,12 +23,13 @@ import java.util.Date;
  *  @Author Skylar11D
  */
 
-public abstract class Runner {
+@FunctionalInterface
+public interface Runner {
 
-    public abstract Player getPlayer();
+    Player getPlayer();
 
 
-    public void prepareBoard(){
+    default void prepareBoard(){
         SimpleDateFormat simplifiedDate = new SimpleDateFormat("dd/MM/yyyy");
         String date = simplifiedDate.format(new Date());
         FastBoard fastBoard = new FastBoard(getPlayer());
@@ -41,12 +42,12 @@ public abstract class Runner {
                 Main.C("&c&l┃ &fVictories: &a"/*+getVictories()*/),
                 Main.C("&c&l┃ &fAlive players: &c0"),
                 Main.C(""),
-                Main.C("&7play.hellmc.gg")
+                Main.C("&7play.example.gg")
         );
 
     }
 
-    public void spectate(){
+    default void spectate(){
         getPlayer().teleport(Main.getInstance().getLocations().of("starting"));
 
         Bukkit.getServer().getOnlinePlayers().forEach(o -> o.hidePlayer(getPlayer()));
@@ -62,7 +63,7 @@ public abstract class Runner {
 
     }
 
-    public void sendTitle(String title, String subtitle, TitleType type){
+    default void sendTitle(String title, String subtitle, TitleType type){
         if(title.isEmpty())
             throw new IllegalArgumentException("title cannot be null");
 
@@ -79,7 +80,7 @@ public abstract class Runner {
 
     }
 
-    public boolean checkDatabaseExistence(){
+    default boolean checkDatabaseExistence(){
         try {
 
             Connection connection = Main.getInstance().getProvider().getMySQL().getConnection();
@@ -100,7 +101,7 @@ public abstract class Runner {
         return false;
     }
 
-    public void prepareDataBaseInfo(){
+    default void prepareDataBaseInfo(){
 
         try {
 
@@ -122,7 +123,7 @@ public abstract class Runner {
 
     }
 
-    public long getVictories(){
+    default long getVictories(){
 
         long a = 1L;
 
@@ -146,7 +147,7 @@ public abstract class Runner {
         return a;
     }
 
-    public long getLoses(){
+    default long getLoses(){
 
         long a = 1L;
 
@@ -170,7 +171,7 @@ public abstract class Runner {
         return a;
     }
 
-    public void setVictories(int quantity){
+    default void setVictories(int quantity){
         try {
             Connection conn = Main.getInstance().getProvider().getMySQL().getConnection();
             PreparedStatement pStatement = conn.prepareStatement("UPDATE runners_data SET 'VICTORIES'=? WHERE UUID=?");
@@ -182,7 +183,7 @@ public abstract class Runner {
         }
     }
 
-    public void setLoses(int quantity){
+    default void setLoses(int quantity){
         try {
             Connection conn = Main.getInstance().getProvider().getMySQL().getConnection();
             PreparedStatement pStatement = conn.prepareStatement("UPDATE runners_data SET 'LOSES'=? WHERE UUID=?");
